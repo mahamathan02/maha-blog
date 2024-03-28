@@ -11,12 +11,16 @@ import {
 import { Blogs } from "../containers";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase.config";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../context/reducers/userReducer";
 
 const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     auth.onAuthStateChanged((userCred) => {
       if (userCred) {
-        console.log(userCred);
+        console.log(userCred.providerData[0]);
+        dispatch(saveUser(userCred.providerData[0]));
       }
     });
   }, []);
