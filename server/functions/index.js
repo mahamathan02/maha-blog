@@ -34,7 +34,7 @@ exports.createBlog = functions.https.onRequest(async (req, res) => {
     try {
       //adding the doc ref to store the data into firestore
       const collectionRef = db.collection("blogs");
-      await collectionRef.doc().set(data);
+      await collectionRef.doc(id).set(data);
       return res
         .status(200)
         .json({ mgs: `${id} has been saved on cloud`, data });
